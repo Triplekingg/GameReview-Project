@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SecuringWebApplication {
-
+testing
 	public static void main(String[] args) throws Throwable {
 		SpringApplication.run(SecuringWebApplication.class, args);
 	}
