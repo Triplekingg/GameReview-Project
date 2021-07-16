@@ -1,4 +1,4 @@
-package com.example.securingweb;
+package io.muzoo.scc.project.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
