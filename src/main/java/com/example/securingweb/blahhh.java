@@ -1,5 +1,9 @@
 package com.example.securingweb;
 
 public class blahhh {
-    //this is to test
+
+    public void pleaseWork(){
+        System.out.println("if you see this means it works");
+    }
+
 }
