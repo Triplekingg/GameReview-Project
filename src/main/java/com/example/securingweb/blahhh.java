@@ -7,6 +7,8 @@ public class blahhh {
         System.out.println("if you see this means it works");
         System.out.println("fuck you");
         System.out.println("fuck 2");
+        System.out.println("mother fucker");
+
     }
     //this is to test
 
