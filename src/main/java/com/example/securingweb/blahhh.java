@@ -6,5 +6,12 @@ public class blahhh {
 
     public static void main(String[] args) {
         System.out.println("hello");
+
     }
+
+
+    public int sum(){
+        return 1 + 2;
+    }
+
 }
