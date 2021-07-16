@@ -1,4 +1,4 @@
-package io.muzoo.scc.project.backend;
+package io.muzoo.ssc.project.backend;
 
 
 
@@ -21,7 +21,6 @@ public class User {
 
     private String password;
 
-    @Column(name = "u_group")
     private String role;
 
 

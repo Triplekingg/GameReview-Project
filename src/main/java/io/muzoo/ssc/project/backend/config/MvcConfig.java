@@ -1,4 +1,4 @@
-package io.muzoo.scc.project.backend.config;
+package io.muzoo.ssc.project.backend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
