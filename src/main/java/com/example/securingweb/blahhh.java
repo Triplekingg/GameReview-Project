@@ -1,8 +1,13 @@
 package com.example.securingweb;
 
 public class blahhh {
-    public int sum(){
-        return 1 + 2;
-    }
-}
 
+    public boolean testing(){
+        return true;
+    }
+
+    public int testing1(){
+        return 1;
+    }
+
+}
