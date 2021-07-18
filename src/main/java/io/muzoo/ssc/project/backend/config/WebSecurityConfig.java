@@ -1,7 +1,9 @@
 
 package io.muzoo.ssc.project.backend.config;
 
+import io.muzoo.ssc.project.backend.SimpleResponseDTO;
 import io.muzoo.ssc.project.backend.auth.OurUserDetailsService;
+import io.muzoo.ssc.project.backend.util.AjaxUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -71,7 +73,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 							 HttpServletResponse response,
 							 AuthenticationException authException) throws IOException, ServletException {
 			// output JSON message
-			response.getWriter().println("You are not allowed to access this.");
+			String ajaxJson = AjaxUtils.convertToString(
+					SimpleResponseDTO
+							.builder()
+							.success(true)
+							.message("Forbidden")
+							.build()
+			);
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			response.getWriter().println(ajaxJson);
 		}
 	}
 
