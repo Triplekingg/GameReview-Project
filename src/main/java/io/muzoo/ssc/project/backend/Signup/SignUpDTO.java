@@ -11,11 +11,14 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SignUpDTO {
 
-    private boolean loggedIn = false;
 
     private String username;
+
+    private String display_name;
 
     private String name;
 
     private String role;
+
+    private boolean exists;
 }
