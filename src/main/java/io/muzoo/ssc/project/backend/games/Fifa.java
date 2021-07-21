@@ -1,4 +1,4 @@
-package io.muzoo.ssc.project.backend;
+package io.muzoo.ssc.project.backend.games;
 
 
 
@@ -10,21 +10,14 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "review_table")
-public class Game {
+@Table(name = "fifa_table")
+public class Fifa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
-    private String gamename;
-
-
-    private String username;
-
-
-    private String feedback;
+    private String reviews;
 
 
 
