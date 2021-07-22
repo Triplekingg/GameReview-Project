@@ -3,18 +3,9 @@ package io.muzoo.ssc.project.backend.review;
 
 import io.muzoo.ssc.project.backend.User;
 import io.muzoo.ssc.project.backend.UserRepository;
-import io.muzoo.ssc.project.backend.gameDTOs.FifaDTO;
-import io.muzoo.ssc.project.backend.gameDTOs.FortniteDTO;
-import io.muzoo.ssc.project.backend.gameDTOs.NbaDTO;
-import io.muzoo.ssc.project.backend.gameDTOs.SiegeDTO;
-import io.muzoo.ssc.project.backend.gamerepositories.FifaRepository;
-import io.muzoo.ssc.project.backend.gamerepositories.FortniteRepository;
-import io.muzoo.ssc.project.backend.gamerepositories.NbaRepository;
-import io.muzoo.ssc.project.backend.gamerepositories.SiegeRepository;
-import io.muzoo.ssc.project.backend.games.Fifa;
-import io.muzoo.ssc.project.backend.games.Fortnite;
-import io.muzoo.ssc.project.backend.games.Nba;
-import io.muzoo.ssc.project.backend.games.Siege;
+import io.muzoo.ssc.project.backend.gameDTOs.*;
+import io.muzoo.ssc.project.backend.gamerepositories.*;
+import io.muzoo.ssc.project.backend.games.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +29,9 @@ public class ReviewController {
 
     @Autowired
     private FifaRepository fifaRepository;
+
+    @Autowired
+    private HorizonRepository horizonRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -81,7 +75,12 @@ public class ReviewController {
                 nba.setUsername(username);
                 nbaRepository.save(nba);
             }
-
+            else if(name.equals("Horizon")){
+                Horizon horizon = new Horizon();
+                horizon.setReviews(review);
+                horizon.setUsername(username);
+                horizonRepository.save(horizon);
+            }
         }
          catch(Exception e){
         }
@@ -127,6 +126,18 @@ public class ReviewController {
         try {
             List<Nba> all = nbaRepository.findAll();
             return NbaDTO.builder().Reviews(all).Test("Failed just kidding ").build();
+        }
+        catch(Exception e){
+        }
+        return null;
+    }
+
+    @GetMapping("/api/review/horizon")
+    public HorizonDTO fetchHorizonReviews(){
+        // Put try aroudn the statement because we use nested dot notation which could raise a NullPointerException
+        try {
+            List<Horizon> all = horizonRepository.findAll();
+            return HorizonDTO.builder().Reviews(all).Test("Failed just kidding ").build();
         }
         catch(Exception e){
         }
