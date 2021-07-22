@@ -15,6 +15,6 @@ import java.util.List;
 public class ReviewDTO {
 
 
-    private List<String> Reviews;
+    private List<Fortnite> Reviews;
     private String Test;
 }
