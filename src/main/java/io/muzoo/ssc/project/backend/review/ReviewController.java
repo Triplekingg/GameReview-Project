@@ -49,19 +49,24 @@ public class ReviewController {
                 fortniteRepository.save(fortnite);
             }
             List<Fortnite> all = fortniteRepository.findAll();
-            request.getSession().setAttribute("testingggg", BigInteger.ONE);
         }
          catch(Exception e){
         }
     }
     @GetMapping("/api/review")
-    public void get(HttpServletRequest request){
+    public ReviewDTO fetchReviews(){
         // Put try aroudn the statement because we use nested dot notation which could raise a NullPointerException
         try {
             List<Fortnite> all = fortniteRepository.findAll();
-            request.getSession().setAttribute("reviews",all);
+            List<String> reviews = new ArrayList<>();
+            for (Fortnite f:all
+                 ) {
+                reviews.add(f.getReviews());
+            }
+            return ReviewDTO.builder().Reviews(reviews).Test("Failed just kidding ").build();
         }
         catch(Exception e){
         }
+        return null;
     }
 }
