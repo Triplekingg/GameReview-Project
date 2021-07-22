@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ReviewDTO {
+public class FortniteDTO {
 
 
     private List<Fortnite> Reviews;
