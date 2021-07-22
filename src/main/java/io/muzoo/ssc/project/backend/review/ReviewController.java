@@ -53,8 +53,8 @@ public class ReviewController {
          catch(Exception e){
         }
     }
-    @GetMapping("/api/review")
-    public ReviewDTO fetchReviews(){
+    @GetMapping("/api/review/fortnite")
+    public ReviewDTO fetchFortniteReviews(){
         // Put try aroudn the statement because we use nested dot notation which could raise a NullPointerException
         try {
             List<Fortnite> all = fortniteRepository.findAll();
