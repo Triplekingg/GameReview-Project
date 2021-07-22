@@ -51,6 +51,7 @@ public class ReviewController {
             if(name.equals("Fifa")){
                 Fifa fifa = new Fifa();
                 fifa.setReviews(review);
+                fifa.setUsername(username);
                 fifaRepository.save(fifa);
             }
             else if(name.equals("Fortnite")){
@@ -87,6 +88,18 @@ public class ReviewController {
         try {
             List<Siege> all = siegeRepository.findAll();
             return SiegeDTO.builder().Reviews(all).Test("Failed just kidding ").build();
+        }
+        catch(Exception e){
+        }
+        return null;
+    }
+
+    @GetMapping("/api/review/fifa")
+    public FifaDTO fetchFifaReviews(){
+        // Put try aroudn the statement because we use nested dot notation which could raise a NullPointerException
+        try {
+            List<Fifa> all = fifaRepository.findAll();
+            return FifaDTO.builder().Reviews(all).Test("Failed just kidding ").build();
         }
         catch(Exception e){
         }
