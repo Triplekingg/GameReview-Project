@@ -5,8 +5,10 @@ import io.muzoo.ssc.project.backend.User;
 import io.muzoo.ssc.project.backend.UserRepository;
 import io.muzoo.ssc.project.backend.gamerepositories.FifaRepository;
 import io.muzoo.ssc.project.backend.gamerepositories.FortniteRepository;
+import io.muzoo.ssc.project.backend.gamerepositories.SiegeRepository;
 import io.muzoo.ssc.project.backend.games.Fifa;
 import io.muzoo.ssc.project.backend.games.Fortnite;
+import io.muzoo.ssc.project.backend.games.Siege;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,9 @@ public class ReviewController {
 
     @Autowired
     private FortniteRepository fortniteRepository;
+
+    @Autowired
+    private SiegeRepository siegeRepository;
 
     @Autowired
     private FifaRepository fifaRepository;
@@ -54,6 +59,13 @@ public class ReviewController {
                 fortnite.setUsername(username);
                 fortniteRepository.save(fortnite);
             }
+            else if(name.equals("Siege")){
+                Siege siege = new Siege();
+                siege.setReviews(review);
+                siege.setUsername(username);
+                siegeRepository.save(siege);
+            }
+
         }
          catch(Exception e){
         }
@@ -64,6 +76,17 @@ public class ReviewController {
         try {
             List<Fortnite> all = fortniteRepository.findAll();
             return FortniteDTO.builder().Reviews(all).Test("Failed just kidding ").build();
+        }
+        catch(Exception e){
+        }
+        return null;
+    }
+    @GetMapping("/api/review/siege")
+    public SiegeDTO fetchSiegeReviews(){
+        // Put try aroudn the statement because we use nested dot notation which could raise a NullPointerException
+        try {
+            List<Siege> all = siegeRepository.findAll();
+            return SiegeDTO.builder().Reviews(all).Test("Failed just kidding ").build();
         }
         catch(Exception e){
         }

@@ -1,7 +1,6 @@
 package io.muzoo.ssc.project.backend.review;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.muzoo.ssc.project.backend.games.Fortnite;
 import io.muzoo.ssc.project.backend.games.Siege;
 import lombok.Builder;
 import lombok.Getter;

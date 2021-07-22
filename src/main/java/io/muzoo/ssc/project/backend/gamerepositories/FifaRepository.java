@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FifaRepository extends JpaRepository<Fifa, Long> {
-//    Fifa findAllByReviews(String username);
 }
