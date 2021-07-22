@@ -24,7 +24,7 @@ public class InitApplicationRunner implements ApplicationRunner {
 
         //Add default admin user and set its password
         User admin = userRepository.findFirstByUsername("admin");
-        if(admin == null){
+        if (admin == null) {
             admin = new User();
             admin.setUsername("admin");
             admin.setPassword(passwordEncoder.encode("123456"));

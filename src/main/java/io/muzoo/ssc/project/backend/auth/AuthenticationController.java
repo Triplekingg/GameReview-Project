@@ -14,39 +14,39 @@ import javax.servlet.http.HttpServletRequest;
 public class AuthenticationController {
 
     @GetMapping("/api/test")
-    public String test(){
+    public String test() {
         return "If this message is shown, it means login is successful, because we didn't set to permit this path.";
     }
 
 
     @PostMapping("/api/login")
-    public SimpleResponseDTO login(HttpServletRequest request){
+    public SimpleResponseDTO login(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         try {
             // check if there is current user logged in, if so log that user our first
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if(principal != null && principal instanceof org.springframework.security.core.userdetails.User){
+            if (principal != null && principal instanceof org.springframework.security.core.userdetails.User) {
                 request.logout();
             }
             request.login(username, password);
             return SimpleResponseDTO
-                            .builder()
-                            .success(true)
-                            .message("You are logged in successfully")
-                            .build();
+                    .builder()
+                    .success(true)
+                    .message("You are logged in successfully")
+                    .build();
         } catch (ServletException e) {
             return SimpleResponseDTO
-                            .builder()
-                            .success(false)
-                            .message(e.getMessage())
-                            .build();
+                    .builder()
+                    .success(false)
+                    .message(e.getMessage())
+                    .build();
         }
 
     }
 
     @GetMapping("/api/logout")
-    public SimpleResponseDTO logout(HttpServletRequest request){
+    public SimpleResponseDTO logout(HttpServletRequest request) {
         try {
             request.logout();
             return SimpleResponseDTO

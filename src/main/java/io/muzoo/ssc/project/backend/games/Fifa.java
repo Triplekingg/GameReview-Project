@@ -1,7 +1,6 @@
 package io.muzoo.ssc.project.backend.games;
 
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +19,6 @@ public class Fifa {
     private String username;
 
     private String reviews;
-
-
 
 
 }

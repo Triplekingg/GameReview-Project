@@ -29,61 +29,62 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private OurUserDetailsService ourUserDetailsService;
+    @Autowired
+    private OurUserDetailsService ourUserDetailsService;
 
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		//configuring security for REST backend APIs
-		// disable csrf
-		http.csrf().disable();
-		//Permit root and /api/login and /api/logout
-		http.authorizeRequests()
-				.antMatchers("/", "/api/login", "/api/logout", "/api/whoami","/api/signup","/api/review","/api/review/fortnite","/api/review/siege","/api/review/fifa","/api/review/nba","/api/review/horizon").permitAll();
-		//permit all OPTIONS requests
-		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        //configuring security for REST backend APIs
+        // disable csrf
+        http.csrf().disable();
+        //Permit root and /api/login and /api/logout
+        http.authorizeRequests()
+                .antMatchers("/", "/api/editdetails", "/api/login", "/api/logout", "/api/whoami", "/api/signup", "/api/review", "/api/review/fortnite", "/api/review/siege", "/api/review/fifa", "/api/review/nba", "/api/review/horizon").permitAll();
+        //permit all OPTIONS requests
+        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
 
-		//Handle error output
-		http.exceptionHandling()
-				.authenticationEntryPoint(new JsonHttp403ForbiddenEntryPoint());
+        //Handle error output
+        http.exceptionHandling()
+                .authenticationEntryPoint(new JsonHttp403ForbiddenEntryPoint());
 
-		// set every other path to require authentication
-		http.authorizeRequests().antMatchers("/**/").authenticated();
+        // set every other path to require authentication
+        http.authorizeRequests().antMatchers("/**/").authenticated();
 
-	}
+    }
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
-	}
-	@Override
-	public UserDetailsService userDetailsService() {
-		return ourUserDetailsService;
-	}
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+    }
 
-	class JsonHttp403ForbiddenEntryPoint implements AuthenticationEntryPoint{
+    @Override
+    public UserDetailsService userDetailsService() {
+        return ourUserDetailsService;
+    }
 
-		@Override
-		public void commence(HttpServletRequest request,
-							 HttpServletResponse response,
-							 AuthenticationException authException) throws IOException, ServletException {
-			// output JSON message
-			String ajaxJson = AjaxUtils.convertToString(
-					SimpleResponseDTO
-							.builder()
-							.success(false)
-							.message("Forbidden")
-							.build()
-			);
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("application/json");
-			response.getWriter().println(ajaxJson);
-		}
-	}
+    class JsonHttp403ForbiddenEntryPoint implements AuthenticationEntryPoint {
+
+        @Override
+        public void commence(HttpServletRequest request,
+                             HttpServletResponse response,
+                             AuthenticationException authException) throws IOException, ServletException {
+            // output JSON message
+            String ajaxJson = AjaxUtils.convertToString(
+                    SimpleResponseDTO
+                            .builder()
+                            .success(false)
+                            .message("Forbidden")
+                            .build()
+            );
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json");
+            response.getWriter().println(ajaxJson);
+        }
+    }
 
 }
