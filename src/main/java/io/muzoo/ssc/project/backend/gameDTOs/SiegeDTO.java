@@ -1,4 +1,4 @@
-package io.muzoo.ssc.project.backend.review;
+package io.muzoo.ssc.project.backend.gameDTOs;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.muzoo.ssc.project.backend.games.Siege;

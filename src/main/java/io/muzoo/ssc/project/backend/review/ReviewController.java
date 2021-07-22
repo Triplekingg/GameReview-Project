@@ -3,11 +3,17 @@ package io.muzoo.ssc.project.backend.review;
 
 import io.muzoo.ssc.project.backend.User;
 import io.muzoo.ssc.project.backend.UserRepository;
+import io.muzoo.ssc.project.backend.gameDTOs.FifaDTO;
+import io.muzoo.ssc.project.backend.gameDTOs.FortniteDTO;
+import io.muzoo.ssc.project.backend.gameDTOs.NbaDTO;
+import io.muzoo.ssc.project.backend.gameDTOs.SiegeDTO;
 import io.muzoo.ssc.project.backend.gamerepositories.FifaRepository;
 import io.muzoo.ssc.project.backend.gamerepositories.FortniteRepository;
+import io.muzoo.ssc.project.backend.gamerepositories.NbaRepository;
 import io.muzoo.ssc.project.backend.gamerepositories.SiegeRepository;
 import io.muzoo.ssc.project.backend.games.Fifa;
 import io.muzoo.ssc.project.backend.games.Fortnite;
+import io.muzoo.ssc.project.backend.games.Nba;
 import io.muzoo.ssc.project.backend.games.Siege;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +29,9 @@ public class ReviewController {
 
     @Autowired
     private FortniteRepository fortniteRepository;
+
+    @Autowired
+    private NbaRepository nbaRepository;
 
     @Autowired
     private SiegeRepository siegeRepository;
@@ -66,6 +75,12 @@ public class ReviewController {
                 siege.setUsername(username);
                 siegeRepository.save(siege);
             }
+            else if(name.equals("Nba")){
+                Nba nba = new Nba();
+                nba.setReviews(review);
+                nba.setUsername(username);
+                nbaRepository.save(nba);
+            }
 
         }
          catch(Exception e){
@@ -100,6 +115,18 @@ public class ReviewController {
         try {
             List<Fifa> all = fifaRepository.findAll();
             return FifaDTO.builder().Reviews(all).Test("Failed just kidding ").build();
+        }
+        catch(Exception e){
+        }
+        return null;
+    }
+
+    @GetMapping("/api/review/nba")
+    public NbaDTO fetchNbaReviews(){
+        // Put try aroudn the statement because we use nested dot notation which could raise a NullPointerException
+        try {
+            List<Nba> all = nbaRepository.findAll();
+            return NbaDTO.builder().Reviews(all).Test("Failed just kidding ").build();
         }
         catch(Exception e){
         }

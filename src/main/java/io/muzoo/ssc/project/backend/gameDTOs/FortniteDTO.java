@@ -1,7 +1,6 @@
-package io.muzoo.ssc.project.backend.review;
+package io.muzoo.ssc.project.backend.gameDTOs;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.muzoo.ssc.project.backend.games.Fifa;
 import io.muzoo.ssc.project.backend.games.Fortnite;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,9 +12,9 @@ import java.util.List;
 @Setter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class FifaDTO {
+public class FortniteDTO {
 
 
-    private List<Fifa> Reviews;
+    private List<Fortnite> Reviews;
     private String Test;
 }
